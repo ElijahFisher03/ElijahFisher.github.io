@@ -8,11 +8,12 @@
 </head>
 <body>
   <header>
-    <h1>Eli</h1>
+    <h1>Elijah Fisher</h1>
     <p>Welcome to my personal website!</p>
     <nav>
       <a href="#about">About Me</a>
-      <a href="#projects">Projects</a>
+      <a href="#work-experience">Work Experience</a>
+      <a href="#Personal Projects">Personal Projects</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -22,16 +23,51 @@
       <h2>About Me</h2>
       <p>Hi! I'm Eli. I'm passionate about technology, coding, and building cool things. This site is a place to introduce myself and showcase my work.</p>
     </section>
-    <section id="projects">
-      <h2>Projects</h2>
+    <section id="work-experience">
+      <h2><strong>Work Experience</strong></h2>
+      <ul class="work-list">
+        <li class="work-item">
+          <div class="work-title-row">
+            <strong>AI Intern</strong>
+            <span class="work-timeframe">Summer 2025</span>
+          </div>
+          <span>Assisted in developing custom AI Agents and Copilots for the team to use and improve automation.</span>
+          <ul><span>Projects include:</span>
+            <li>Using Copilot studio to create a custom copilot that took information from a PDF file when inserted into a folder and formatted it in a more readable way.</li>
+            <li>Created a custom Copilot that would act as a chatbot to ask questions about documents and make changes if needed.</li>
+          </ul>
+        </li>
+        <li class="work-item">
+          <div class="work-title-row">
+            <strong>Lab Assistant (IoT Space)</strong>
+            <span class="work-timeframe">2024 - 2025</span>
+          </div>
+          <span>Assisted in developing IoT solutions and prototypes.</span>
+          <ul><span>Projects include:</span>
+            <li>Worked with various sensors and devices to collect and analyze data. Data was displayed on a web dashboard using NodeRed on a Raspberry Pi using the MQTT protocol.</li>
+            <li>Created a live video monitoring system using Raspberry Pi and camera modules.</li>
+            <li>Developed a way to use multiple of the same sensor by multiplexing the sensors and using different busses on a Dragonboard.</li>
+            <span>Capstone Project:</span>
+            <li>Travelled to a customer location to set up a system to collect real time data during the shell build process at an investment casting steel foundry.</li>
+          </ul>
+        </li>
+        <!-- Add more work experiences here -->
+      </ul>
+    </section>
+    <section id="Personal Projects">
+      <h2>Personal Projects</h2>
       <ul class="project-list">
         <li>
-          <strong>Project One</strong><br>
-          <span>A brief description of your first project.</span>
+          <strong>Connect Four AI </strong><br>
+          <span>For a project in Class we had to create an AI that could play Connect Four. This process included training the AI to look at the board and understand the game mechanics along with strategies for winning. For this specific AI we awarded more points for pieces placed towards the center of the board, which increased the win rate significantly.</span>
         </li>
         <li>
-          <strong>Project Two</strong><br>
-          <span>A brief description of your second project.</span>
+          <strong>Personal Website</strong><br>
+          <span>This website serves as a portfolio to showcase my work, skills, and interests. It is built using HTML, CSS, and JavaScript, and is designed to be responsive and user-friendly.</span>
+        </li>
+        <li>
+          <strong>Web Games (still in development)</strong><br>
+          <span>This project involves creating a series of web-based games using HTML, CSS, and JavaScript. The goal is to build engaging and interactive experiences that can be played directly in the browser. Currently I am working on making a platformer game, and look to make a roguelike game in the future.</span>
         </li>
         <!-- Add more projects here -->
       </ul>

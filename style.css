@@ -1,3 +1,28 @@
+/* Work Experience Timeframe Alignment */
+.work-list {
+    list-style: none;
+    padding: 0;
+}
+.work-item {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+.work-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.work-title-row strong {
+    font-size: 1.1em;
+}
+.work-timeframe {
+    color: #888;
+    font-size: 0.95em;
+    font-weight: 500;
+    margin-left: 1rem;
+}
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
