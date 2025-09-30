@@ -3,3 +3,8 @@ canvas {
   display: block;
   margin: 0 auto;
 }
+h1#gameTitle {
+  text-align: top center;
+  margin-top: 1rem;
+  font-family: 'Arial', sans-serif;
+}
