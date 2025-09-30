@@ -1,8 +1,6 @@
 // game.js
 
 class Player {
-    
-    
     constructor(x, y, width, height, color) {
         this.x = x;
         this.y = y;
@@ -14,7 +12,7 @@ class Player {
         this.vy = 0;
         this.gravity = 0.1;
         this.speed = 0.5;
-        this.jumpPower = -10;
+        this.jumpPower = -5;
         
     }
     
@@ -58,6 +56,8 @@ const rectangles = [];
 const rec1 = new Rectangle(10, 500, 300, 50);
 const rec2 = new Rectangle(400, 400, 200, 50);
 const rec3 = new Rectangle(400, 300, 150, 50);
+const rec4 = new Rectangle(600, 200, 150, 50);
+rectangles.push(rec4);
 rectangles.push(rec3);
 rectangles.push(rec2);
 rectangles.push(rec1);
@@ -69,21 +69,38 @@ const ctx = canvas.getContext('2d');
 
 
 // Create a player instance
-const player = new Player(50, 50, 30, 30, 'blue');
+const player = new Player(10, 465, 30, 30, 'blue');
 let keys = [];
+
+//creating score
+let score = 0;
+let scoreText = "Score: " + score;
+
 // Game loop
 function gameLoop() {
-    
+    console.log(score);
+    scoreText = "Score: " + score;
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    //console.log(player.onplatform);
+    ctx.font = "bold 20px Arial";
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(scoreText, canvas.width / 2, 10);
     // Draw the player
     rectangles.forEach(rect => {
         rect.draw(ctx);
     });
     player.draw(ctx);
     update();
-    
+    if(player.y > canvas.height) {
+        player.x = 10;
+        player.y = 465;
+        score = 0;
+        rectangles.forEach(rect => {
+            rect.landedOn = false;
+        });
+    }
 
     // Request the next animation frame
     requestAnimationFrame(gameLoop);
@@ -116,6 +133,7 @@ addEventListener('keydown', (event) => {
     } 
     if (event.key === ' ') { // Spacebar for jump
         // Only allow jump if on ground
+        
         if (player.onplatform) {
             player.vy = player.jumpPower;
             player.onplatform = false; // Player is now in the air
@@ -131,39 +149,43 @@ addEventListener('keyup', (event) => {
     }
 });
 
-function update(){
-    if(player.x > rec1.x + rec1.width || player.x + player.width < rec1.x){
-            player.onplatform = false;
-        }
-    
-    //check for collision
+function update() {
+    // assume in air
+    player.onplatform = false;
+
+    // gravity
+    player.vy += player.gravity;
+
+    // horizontal input
+    if (keys.includes("ArrowLeft"))  player.vx -= player.speed;
+    if (keys.includes("ArrowRight")) player.vx += player.speed;
+
+    // apply movement
+    player.x += player.vx;
+    player.y += player.vy;
+
+    // check collisions
     rectangles.forEach(rect => {
         if (player.collision(rect)) {
-            player.onplatform = true;
-            player.y = rect.y - player.height; // Adjust player position to be on top of the platform
-        } else if (!player.y > rect.y - player.height) {
-            player.onplatform = false;
+            if (player.vy >= 0 && player.y + player.height <= rect.y + 10) {
+                player.onplatform = true;
+                player.vy = 0;
+                player.y = rect.y - player.height;
+            }
+            if (!rect.landedOn) {
+                score += 1;
+                rect.landedOn = true;
+            }
+            
         }
     });
 
-    // Gravity
-    if (!player.onplatform) {
-        player.vy += player.gravity;       
-    } else {   
-        player.vy = 0;
-    }
-    if(keys.includes('ArrowLeft')){
-        player.vx -= player.speed;
-    }
-    if(keys.includes('ArrowRight')){
-        player.vx += player.speed;
-    }
-    player.x += player.vx;
-    player.y += player.vy;
+    // friction when grounded
     
-    player.vx *= 0.9; // Friction
-
+    player.vx *= 0.8;
+    
 }
+
 
 
 
