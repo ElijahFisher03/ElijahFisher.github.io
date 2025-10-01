@@ -13,6 +13,8 @@ class Player {
         this.gravity = 0.1;
         this.speed = 0.5;
         this.jumpPower = -5;
+        //player area
+        this.area = {x: this.x, y: this.y, width: this.width, height: this.height};
         
     }
     
@@ -42,6 +44,7 @@ class Rectangle {
         this.height = height;
         this.borderColor = 'black';
         this.landedOn = false;
+        this.area = {x: this.x, y: this.y, width: this.width, height: this.height};
     }
 
     draw(ctx) {
@@ -69,7 +72,7 @@ const ctx = canvas.getContext('2d');
 
 
 // Create a player instance
-const player = new Player(10, 465, 30, 30, 'blue');
+const player = new Player(10, 500, 30, 30, 'blue');
 let keys = [];
 
 //creating score
@@ -171,13 +174,22 @@ function update() {
                 player.onplatform = true;
                 player.vy = 0;
                 player.y = rect.y - player.height;
-            }
-            if (!rect.landedOn && rect !== rec1) {
+                if (!rect.landedOn && rect !== rec1) {
+                    score += 1;
+                    rect.landedOn = true;
+                }
+            } 
+            if (player.y + player.height > rect.y && player.y < rect.y + rect.height) {
+                player.vx = 0;
                 
-                score += 1;
-                
-                rect.landedOn = true;
             }
+            //add collision from the bottom of the platform
+            if (player.vy < 0 && player.y >= rect.y + rect.height - 10) {
+                player.vy = 0;
+                player.y = rect.y + rect.height;
+            }
+
+            
             
         }
     });
