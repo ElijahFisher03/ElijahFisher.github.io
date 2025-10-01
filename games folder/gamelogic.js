@@ -45,6 +45,7 @@ class Rectangle {
         this.borderColor = 'black';
         this.landedOn = false;
         this.area = {x: this.x, y: this.y, width: this.width, height: this.height};
+        this.endPlatform = false;
     }
 
     draw(ctx) {
@@ -60,6 +61,10 @@ const rec1 = new Rectangle(10, 500, 300, 50);
 const rec2 = new Rectangle(400, 400, 200, 50);
 const rec3 = new Rectangle(400, 300, 150, 50);
 const rec4 = new Rectangle(600, 200, 150, 50);
+const endPlatform = new Rectangle(300, 100, 100, 50);
+endPlatform.color = 'green';
+endPlatform.endPlatform = true;
+rectangles.push(endPlatform);
 rectangles.push(rec4);
 rectangles.push(rec3);
 rectangles.push(rec2);
@@ -72,7 +77,7 @@ const ctx = canvas.getContext('2d');
 
 
 // Create a player instance
-const player = new Player(10, 500, 30, 30, 'blue');
+const player = new Player(10, 465, 30, 30, 'blue');
 let keys = [];
 
 //creating score
@@ -111,7 +116,15 @@ function gameLoop() {
 
 // Start the game loop
 gameLoop();
-
+function endGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = "bold 30px Arial";
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText("You Win!", canvas.width / 2, canvas.height / 2 - 30); 
+    ctx.fillText("Final Score: " + score, canvas.width / 2, canvas.height / 2 + 10);
+    ctx.fillText("Refresh to play again", canvas.width / 2, canvas.height / 2 + 50);
+}   
 
 
 addEventListener('keydown', (event) => {
@@ -177,6 +190,9 @@ function update() {
                 if (!rect.landedOn && rect !== rec1) {
                     score += 1;
                     rect.landedOn = true;
+                }
+                if(rect.endPlatform && player.x <= rect.x + rect.width/2 - player.width/2){
+                    setTimeout(endGame(), 1000);
                 }
             } 
             if (player.y + player.height > rect.y && player.y < rect.y + rect.height) {
