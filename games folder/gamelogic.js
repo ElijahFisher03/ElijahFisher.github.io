@@ -172,10 +172,10 @@ function update() {
                 player.vy = 0;
                 player.y = rect.y - player.height;
             }
-            if (!rect.landedOn) {
-                if(!rec1) {
-                    score += 1;
-                }
+            if (!rect.landedOn && rect !== rec1) {
+                
+                score += 1;
+                
                 rect.landedOn = true;
             }
             
