@@ -1,0 +1,20 @@
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<link rel="stylesheet" href="topdownstyle.css">
+<script src="topdowngamelogic.js"></script>
+<h1 id="gameTitle">Simple top down roguelike game</h1>
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'black';
+    
+  // Simple game loop
+  function gameLoop() {
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Game drawing logic goes here
+    requestAnimationFrame(gameLoop);
+  }
+
+  gameLoop();
+
+</script>

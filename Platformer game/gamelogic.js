@@ -192,7 +192,7 @@ function update() {
                     rect.landedOn = true;
                 }
                 if(rect.endPlatform && player.x <= rect.x + rect.width/2 - player.width/2){
-                    setTimeout(endGame(), 1000);
+                    endGame();
                 }
             } 
             if (player.y + player.height > rect.y && player.y < rect.y + rect.height) {
