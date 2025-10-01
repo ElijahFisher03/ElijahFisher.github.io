@@ -173,7 +173,9 @@ function update() {
                 player.y = rect.y - player.height;
             }
             if (!rect.landedOn) {
-                score += 1;
+                if(!rec1) {
+                    score += 1;
+                }
                 rect.landedOn = true;
             }
             
